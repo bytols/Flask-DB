@@ -1,0 +1,21 @@
+docker network create -d bridge aulas
+
+docker network connect aulas pdb_python
+
+
+:::: Diretório do Backend
+
+docker build . -t serv001-back:latest
+
+docker run -d -p 8001:8001 --name serv001-backend --network aulas serv001-back:latest  
+
+
+:::: Diretório do Frontend
+
+docker build . -t serv001-front:latest
+
+docker run -d -p 8008:8008 --name serv001-frontend --network aulas serv001-front:latest  
+
+
+
+

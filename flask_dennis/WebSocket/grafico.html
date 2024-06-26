@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+    <div id="chart_div"></div>
+    <button onclick="mudar()">Clique</button>
+    <script>
+        let data, options, chart, i = 20
+
+        const initgraph = () => {
+            data = new google.visualization.DataTable();
+            data.addColumn('number', 'X');
+            data.addColumn('number', 'Dogs');
+            options = {
+                hAxis: {
+                    title: 'Time'
+                },
+                vAxis: {
+                    title: 'Popularity'
+                },
+                backgroundColor: '#f1f8e9'
+            };
+
+        }
+        const drawBackgroundColor = () => {
+            initgraph();
+            data.addRows([
+                [0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9],
+                [6, 11], [7, 27], [8, 33], [9, 40], [10, 32], [11, 35],
+                [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
+                [18, 52], [19, 54], [20, 42]
+            ]);
+            chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+
+        google.charts.load('current', { packages: ['corechart', 'line'] });
+        google.charts.setOnLoadCallback(drawBackgroundColor);
+
+        const socket = new WebSocket('ws://localhost:8000');
+        socket.addEventListener('open', (event) => {
+            console.log("Conectado com o Web Socket");
+        });
+
+        socket.addEventListener('message', (event) => {
+            ++i;
+            data.addRows([[i, eval(event.data)]]);
+            chart.draw(data, options);
+            console.log(event.data);
+        });
+
+        const mudar = () => {
+            socket.send("PETRO");
+        }
+
+    </script>
+</body>
+
+</html>
