@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.engine import URL
 
 url = URL.create(
@@ -10,6 +10,8 @@ url = URL.create(
     database="postgres"
 )
 
+
 engine = create_engine(url)
+
 
 engine.connect()
