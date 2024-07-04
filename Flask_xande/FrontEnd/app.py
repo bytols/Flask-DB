@@ -4,7 +4,7 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from LibBiblioteca import ItemClass, AutorClass, UsuarioClass , PagamentoClass
-from LibIntegracao import UsuarioNet
+from LibIntegracao import UsuarioNet, ItemNet
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 from forms import LoginForm, RegistrationForm
@@ -12,7 +12,6 @@ from flask import request
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
-
 
 
 # Configurações do Flask-Mail
@@ -66,6 +65,16 @@ def login():
         else:
             flash('Invalid username or password.', 'danger')
     return render_template('login.html', form=form , usuarios = UsuarioNet().obterTodos())
+
+
+@app.route('/detalhar', methods=['GET', 'POST'])
+def detalhar():
+    return render_template('detalhar.html', usuarios = ItemNet().obterTodos())
+
+
+@app.route('/catalogo', methods=['GET', 'POST'])
+def catalogo():
+    return render_template('catalogo.html', usuarios = ItemNet().obterTodos())
 
 @app.get('/register')
 def register():

@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca do Éter</title>
-    <link rel="icon" type="image/png" href="icon.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename= 'icon.png')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename= 'styles.css')}}">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1 class="title"><img src="icon.png" alt="Ícone"> Biblioteca do Éter</h1>
+            <h1 class="title"><img src="{{url_for('static', filename= 'icon.png')}}" alt="Ícone"> Biblioteca do Éter</h1>
             <div class="search-bar">
                 <input type="text" id="searchInput" placeholder="Buscar eBooks...">
                 <button onclick="searchBooks()">Pesquisar</button>
@@ -23,10 +23,16 @@
         </div>
     </header>
     <main>
-        <section class="catalogo">
+        <section class="welcome">
             <h2>Livro</h2>
             <h1>Livro Nome</h1>
             <h3>Livro autor</h3>
+        </section>
+        <section class="catalogo">
+            <div class="imgcatalogo">
+            <img src="{{url_for('static', filename= 'catalogo/ArtePaz.png')}}" alt="arte da paz">
+            <p>Descrição</p>
+            </div>
 
 
 
@@ -58,9 +64,9 @@
                 <div class="footer-section social">
                     <h3>Redes Sociais</h3>
                     <ul>
-                        <li><a href="https://www.facebook.com/"><img src="iconsocial/face.png" alt="Icone Facebook" width="35" height="35"></a></li>
-                        <li><a href="https://x.com/"><img src="iconsocial/twitter.png" alt="Icone Twitter" width="35" height="35"></a></li>
-                        <li><a href="https://www.instagram.com/"><img src="iconsocial/insta.png" alt="Icone Insta" width="35" height="35"></a></li>
+                        <li><a href="https://www.facebook.com/"><img src="{{url_for('static', filename= 'iconsocial/face.png')}}" alt="Icone Facebook" width="35" height="35"></a></li>
+                        <li><a href="https://x.com/"><img src="{{url_for('static', filename= 'iconsocial/twitter.png')}}" alt="Icone Twitter" width="35" height="35"></a></li>
+                        <li><a href="https://www.instagram.com/"><img src="{{url_for('static', filename= 'iconsocial/insta.png')}}" alt="Icone Insta" width="35" height="35"></a></li>
                     </ul>
                 </div>
             </div>
