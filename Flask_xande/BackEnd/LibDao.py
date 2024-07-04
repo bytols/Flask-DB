@@ -85,7 +85,7 @@ class ItemDao:
 
     def incluir(self, item):
         session = Session()
-        i = Item(Titulo_Item = item.Titulo , Descricao_Item = item.Descricao , Autor_Id =  item.Autor, Categoria_Id = item.Categoria)
+        i = Item(Titulo_Item = item.Titulo , Descricao_Item = item.Descricao , Autor_Id =  item.Autor, Categoria_Id = item.Categoria, Id_Item = item.ID)
         session.add(i)
         session.commit()
     def alterar(self, item):
@@ -103,14 +103,14 @@ class ItemDao:
         stmt = select(Item)
         items = []
         for u in session.scalars(stmt):
-            item = ItemClass(u.Titulo_Item , u.Descricao_Item , u.Autor_Id , u.Categoria_Id )
+            item = ItemClass( u.Titulo_Item , u.Descricao_Item , u.Autor_Id , u.Categoria_Id, u.Id_Item )
             items.append(item)
         session.commit()
         return items
     def obter(self, chave):
         session = Session()
         u = session.get(Item, chave)
-        item = ItemClass(u.Titulo_Item , u.Descricao_Item , u.Autor_Id , u.Categoria_Id )
+        item = ItemClass(u.Titulo_Item , u.Descricao_Item , u.Autor_Id , u.Categoria_Id, u.Id_Item)
         session.commit()
         return item
     

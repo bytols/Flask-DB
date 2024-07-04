@@ -2,8 +2,12 @@ import requests
 import json
 from LibBiblioteca import ItemClass, AutorClass, UsuarioClass, PagamentoClass
 
+def JSON2Item(dadosJSON):
+    p = ItemClass(dadosJSON["Email"],dadosJSON["Nome"],dadosJSON["Senha"],dadosJSON["Status"],dadosJSON["id"])
+    return p
+
 def JSON2Pessoa(dadosJSON):
-    p = UsuarioClass(dadosJSON["Assinatura"],dadosJSON["Email"],dadosJSON["Nome"],dadosJSON["Senha"],dadosJSON["Status"])
+    p = UsuarioClass(dadosJSON["Email"],dadosJSON["Nome"],dadosJSON["Senha"],dadosJSON["Status"],dadosJSON["Assinatura"])
     return p
 
 class UsuarioNet:
@@ -20,8 +24,10 @@ class UsuarioNet:
     
     def incluir(self, p):
         resposta = requests.post(self.baseURL,json=p.serialize())
+        print(resposta)
+        print(type(resposta))
         return JSON2Pessoa(json.loads(resposta.content))
-        
+
     def alterar(self, p):
         resposta = requests.put(f'{self.baseURL}/{p.matricula}',json=p.serialize())
         return resposta.status_code # cod HTTP 200 = sucesso

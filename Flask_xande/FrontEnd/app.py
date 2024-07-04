@@ -8,6 +8,7 @@ from LibIntegracao import UsuarioNet
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 from forms import LoginForm, RegistrationForm
+from flask import request
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
@@ -66,7 +67,7 @@ def login():
             flash('Invalid username or password.', 'danger')
     return render_template('login.html', form=form , usuarios = UsuarioNet().obterTodos())
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.get('/register')
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
@@ -95,6 +96,19 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
+
+@app.post('/register') 
+def register_teste():
+    nome = request.form.get("nome")
+    senha = request.form.get("senha")
+    email = request.form.get("email")
+    status = request.form.get("status")
+    assinatura = True
+    a = UsuarioClass(nome, email, senha, status, assinatura)
+    print(a)
+    Usuario = UsuarioNet()
+    Usuario.incluir(p= a)
+
 @app.route('/confirm/<token>')
 def confirm_email(token):
     try:
@@ -122,6 +136,8 @@ def logout():
     logout_user()
     flash('You have been logged out.', 'success')
     return redirect(url_for('login'))
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

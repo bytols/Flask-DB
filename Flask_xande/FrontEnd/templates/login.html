@@ -23,14 +23,6 @@
     <div class="form-group">
         {{ form.submit() }}
     </div>
-    <div>
-        {% for u in usuarios %}
-            <p>{{u.Nome}}</p>
-            <p>{{u.Senha}}</p>
-            <p>{{u.Email}}</p>
-            <p>{{u.Status}}</p>
-            <p>{{u.Assinatura}}</p>
-        {% endfor %}
-    </div>
+
 </form>
 {% endblock %}
