@@ -74,11 +74,21 @@ def criar_autores():
     Mark_Twain = AutorClass(Autor="Mark Twain", Nacionalidade="norte-americano")
     controler.incluir(Mark_Twain)
 
+    # Autor 11: Frank Herbert
+    Frank_Herbert = AutorClass(Autor="Frank Herbert", Nacionalidade="norte-americano")
+    controler.incluir(Frank_Herbert)
+
+    # Autor 12: Paulo Coelho
+    Paulo_Coelho = AutorClass(Autor= "Paulo Coelho", Nacionalidade= "Brasileiro")
+    controler.incluir(Paulo_Coelho)
+
     Session.commit()
+
 
 # Chamar a função para criar os autores
 
 def incluir_items():
+    controler = AutorController()
 
     categoria_ficcao = Session.query(Categoria).filter_by(Nome_Categorias = "ficcao" ).first()
     categoria_suspense = Session.query(Categoria).filter_by(Nome_Categorias = "suspense" ).first()
@@ -101,6 +111,8 @@ def incluir_items():
     Leo_Tolstoy = Session.query(Autor).filter_by(Nome_Autor = "Leo Tolstoy" ).first()
     Mark_Twain = Session.query(Autor).filter_by(Nome_Autor = "Mark Twain" ).first()
     Paulo_Coelho = Session.query(Autor).filter_by(Nome_Autor = "Paulo Coelho" ).first()
+    Frank_Herbert = Session.query(Autor).filter_by(Nome_Autor = "Frank Herbert" ).first()
+
 
     controler =  ItemController()
     O_Alquimista = ItemClass(Titulo="O Alquimista", Descricao="A aventura de um pastor de ovelhas em busca de sua jornada pessoal e conhecendo os segredos do mundo e da alquimia", Autor=Paulo_Coelho.id_Autor, Categoria=categoria_aventura.Id_Categoria)
@@ -149,8 +161,18 @@ def incluir_items():
     controler.incluir(p)
     q = ItemClass(Titulo="O Diário de um Mago", Descricao="A jornada espiritual de Paulo Coelho pelo caminho de Santiago", Autor=Paulo_Coelho.id_Autor, Categoria=categoria_academico.Id_Categoria)
     controler.incluir(q)
-
-
+    r = ItemClass(Titulo="Harry Potter e a Câmara Secreta", Descricao="Harry e seus amigos, Ron e Hermione, investigam os ataques misteriosos a estudantes e tentam desvendar os segredos da Câmara", Autor=JK_Rowling.id_Autor, Categoria=categoria_ficcao.Id_Categoria)
+    controler.incluir(r)
+    s = ItemClass(Titulo="Harry Potter e o prisioneiro de Azkaban", Descricao="Harry e seus amigos, Ron e Hermione, desvendam segredos do passado de Sirius Black e seu próprio papel na história da família Potter", Autor=JK_Rowling.id_Autor, Categoria=categoria_ficcao.Id_Categoria)
+    controler.incluir(s)
+    t = ItemClass(Titulo="Harry Potter e a Ordem da Fênix", Descricao="Harry e seus amigos formam a Armada de Dumbledore para se prepararem para a batalha que se aproxima", Autor=JK_Rowling.id_Autor, Categoria=categoria_ficcao.Id_Categoria)
+    controler.incluir(t)
+    u = ItemClass(Titulo="Harry Potter e o Enigma do Princípe", Descricao="Harry começa seu sexto ano em Hogwarts, onde descobre mais sobre o passado de Voldemort através das memórias coletadas por Dumbledore", Autor=JK_Rowling.id_Autor, Categoria=categoria_ficcao.Id_Categoria)
+    controler.incluir(u)
+    v = ItemClass(Titulo="Harry Potter e as Relíquias da Morte", Descricao="Harry, Ron e Hermione abandonam Hogwarts e embarcam em uma missão perigosa para encontrar e destruir as Horcruxes de Voldemort", Autor=JK_Rowling.id_Autor, Categoria=categoria_ficcao.Id_Categoria)
+    controler.incluir(v)
+    w = ItemClass(Titulo="Duna", Descricao="Um futuro distante, em um universo onde casas nobres competem pelo controle do deserto de Arrakis, também conhecido como Duna", Autor=Frank_Herbert.id_Autor, Categoria=categoria_ficcao.Id_Categoria)
+    controler.incluir(w)
 
     Session.commit()
 
