@@ -1,7 +1,7 @@
 import datetime
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Table, Boolean
 from sqlalchemy.sql import func
-from sqlalchemy.orm import declarative_base, Mapped, mapped_column, relationship
+from sqlalchemy.orm import declarative_base, Mapped, mapped_column, relationship 
 from SQL_Engine import engine
 
 Base = declarative_base()
@@ -16,10 +16,12 @@ class Usuario(Base):
     Senha_Usuario: Mapped[str] = mapped_column(String(255))
     Status_Usuario: Mapped[str] = mapped_column(String(20))
     Data_Registro: Mapped[DateTime] = mapped_column(DateTime(timezone=True), server_default=func.now())
-    Ultimo_Login: Mapped[DateTime] = mapped_column(DateTime(timezone=True), onupdate=func.now())
+    Ultimo_Login: Mapped[DateTime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     Assinatura: Mapped[Boolean] = mapped_column(Boolean(), default=True)
     Pagamento: Mapped[list["Pagamento"]] = relationship("Pagamento", back_populates="Usuario", cascade="all, delete-orphan")
     Favoritos: Mapped[list["Item"]] = relationship(secondary="Favoritos", back_populates="Usuarios")
+
+
 
 class Autor(Base):
     __tablename__ = 'Autor'

@@ -151,7 +151,6 @@ class PagamentoDao:
         session.commit()
         return pagamento
 
-# autor = Autor(Nome_Autor = "Stephen King", Nacionalidade_Autor = "norte-americano" , id_Autor = 1)
 
-# Session.add(utor)
-# Session.commit()
+
+

@@ -3,12 +3,16 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from LibBiblioteca import ItemClass, AutorClass, UsuarioClass , PagamentoClass
+from LibIntegracao import UsuarioNet
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 from forms import LoginForm, RegistrationForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
+
+
 
 # Configurações do Flask-Mail
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -41,6 +45,7 @@ def load_user(user_id):
             return user
     return None
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -59,7 +64,7 @@ def login():
             return redirect(url_for('dashboard'))
         else:
             flash('Invalid username or password.', 'danger')
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form , usuarios = UsuarioNet().obterTodos())
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
