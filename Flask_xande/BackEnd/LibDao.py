@@ -54,7 +54,9 @@ class UsuarioDao:
         session.commit()
     def alterar(self, usuario):
         session=Session()
-        session.execute(update(Usuario),[usuario.serialize()])
+        print(usuario)
+        #transformar usuario em classe
+        session.execute(update(Usuario).where(Usuario.Nome_Usuario == usuario.Nome),[usuario.serialize()])
         session.commit()
     def excluir(self, chave):
         session = Session()

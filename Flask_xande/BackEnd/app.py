@@ -28,23 +28,26 @@ def obter(chave):
 @app.post("/api/usuario")
 def incluir():
     dados = request.get_json()
-    u = UsuarioClass(dados["nome"], dados["idade"])
-    u.matricula = dados["matricula"]
+    u = UsuarioClass(dados["Nome"], dados["Email"], dados["Senha"] , dados["Status"] , dados["Assinatura"] )
     controle_user.incluir(u)
     return jsonify(u.serialize())
 
-@app.put("/api/usuario/<matricula>")
-def alterar(matricula):
+@app.put("/api/usuario/<chave>")
+def alterar(chave):
     dados = request.get_json()
-    p = controle_user.obter(matricula)
-    p.nome = dados["nome"]
-    p.idade = dados["idade"]
-    controle_user.alterar(p)
+    print(dados)
+    u = controle_user.obter(chave)
+    u.Nome = dados["Nome"]
+    u.Email = dados["Email"]
+    u.Senha = dados["Senha"]
+    u.Status = dados["Status"]
+    u.Assinatura = dados["Assinatura"]
+    controle_user.alterar(u)
     return make_response("Alterado!",200)
 
-@app.delete("/api/usuario/<matricula>")
-def excluir(matricula):
-    controle_user.excluir(matricula)
+@app.delete("/api/usuario/<chave>")
+def excluir(chave):
+    controle_user.excluir(chave)
     return make_response("Removido!",200)
 
 if __name__ == '__main__':
@@ -67,22 +70,22 @@ def obter(chave):
 def incluir():
     dados = request.get_json()
     u = ItemClass(dados["nome"], dados["idade"])
-    u.matricula = dados["matricula"]
+    u.chave = dados["chave"]
     controle_item.incluir(u)
     return jsonify(u.serialize())
 
-@app.put("/api/catalogo/<matricula>")
-def alterar(matricula):
+@app.put("/api/catalogo/<chave>")
+def alterar(chave):
     dados = request.get_json()
-    p = controle_item.obter(matricula)
+    p = controle_item.obter(chave)
     p.nome = dados["nome"]
     p.idade = dados["idade"]
     controle_item.alterar(p)
     return make_response("Alterado!",200)
 
-@app.delete("/api/catalogo/<matricula>")
-def excluir(matricula):
-    controle_item.excluir(matricula)
+@app.delete("/api/catalogo/<chave>")
+def excluir(chave):
+    controle_item.excluir(chave)
     return make_response("Removido!",200)
 
 if __name__ == '__main__':

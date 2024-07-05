@@ -16,7 +16,6 @@ class Usuario(Base):
     Senha_Usuario: Mapped[str] = mapped_column(String(255))
     Status_Usuario: Mapped[str] = mapped_column(String(20))
     Data_Registro: Mapped[DateTime] = mapped_column(DateTime(timezone=True), server_default=func.now())
-    Ultimo_Login: Mapped[DateTime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     Assinatura: Mapped[Boolean] = mapped_column(Boolean(), default=True)
     Pagamento: Mapped[list["Pagamento"]] = relationship("Pagamento", back_populates="Usuario", cascade="all, delete-orphan")
     Favoritos: Mapped[list["Item"]] = relationship(secondary="Favoritos", back_populates="Usuarios")

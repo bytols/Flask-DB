@@ -19,7 +19,7 @@ class PessoaDAO:
         return pessoa
     def alterar(self, pessoa):
         session=Session()
-        session.execute(update(PessoaDB),[pessoa.serialize()])
+        session.execute(update(PessoaDB).where(PessoaDB.nome == pessoa.Nome) ,[pessoa.serialize()])
         session.commit()
     def excluir(self, chave):
         session = Session()

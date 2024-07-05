@@ -26,7 +26,7 @@
             <h2>Área do Usuário</h2>
             <!-- Conteúdo da Área do Usuário -->
             <div class="user-content">
-                <h3>Bem-vindo, [Nome do Usuário]</h3>
+                <h3>Bem-vindo, {{ usuario.Email }}</h3>
                 <div class="favorited-books">
                     <h4>Livros Favoritados</h4>
                     <ul>
@@ -36,6 +36,20 @@
                     </ul>
                 </div>
             </div>
+            <h1>alterar usuario</h1>
+            <form action="/user_area" method="post">
+                <label for="teste">nome</label>
+                <input type="text" name="nome">
+                <label for="teste">senha</label>
+                <input type="text" name="senha"> 
+                <label for="teste">email</label>
+                <input type="text" name="email"> 
+                <label for="teste">status</label>
+                <input type="text" name="status">  
+                <label for="teste">assinatura</label>
+                <input type="checkbox" name="assinatura">  
+                <button><submit type="submit">clicar</submit></button>
+            </form>
         </section>
     </main>
 

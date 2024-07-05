@@ -34,8 +34,7 @@ def excluir():
 @app.get("/pessoas/altera")
 def formAlterar():
     matricula = int(request.args["matricula"])
-    return render_template("formPessoasAltera.html",
-                           p=cliente.obter(matricula))
+    return render_template("formPessoasAltera.html",p=cliente.obter(matricula))
 
 @app.post("/pessoas/altera")
 def alterar():

@@ -8,11 +8,16 @@ from LibIntegracao import UsuarioNet
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 from forms import LoginForm, RegistrationForm
-from flask import request
+from flask import request, session
+from flask_session import Session
+
+import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
-
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 
 # Configurações do Flask-Mail
@@ -25,7 +30,9 @@ app.config['MAIL_PASSWORD'] = 'jxuf uctq goco uajr'
 mail = Mail(app)
 s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
 
-login_manager = LoginManager(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
+
 login_manager.login_view = 'login'
 
 class User(UserMixin):
@@ -36,36 +43,62 @@ class User(UserMixin):
         self.email = email
         self.confirmed = confirmed
 
-# Usuário de exemplo (normalmente, você usaria um banco de dados)
-users = [User(id=1, username='admin', password='password', email='admin@example.com', confirmed=True)]
+class UserLogin(UsuarioClass):
+
+    def __init__(self, usuario, id):
+
+        self.Nome = usuario.Nome
+        self.Email = usuario.Email
+        self.Senha = usuario.Senha
+        self.Status = usuario.Status
+        self.Assinatura = usuario.Assinatura
+        self.is_active = True
+        self.id = int(id)
+
+    def get_id(self):
+        return str(self.id)
+
 
 @login_manager.user_loader
-def load_user(user_id):
-    for user in users:
-        if user.id == int(user_id):
-            return user
-    return None
+def load_user(id_usuario):
+    Usuario = UsuarioNet()
+    Usuario.obter(id_usuario)
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('dashboard'))
-    form = LoginForm()
-    if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
-        user = next((u for u in users if u.username == username and u.password == password), None)
-        if user:
-            if not user.confirmed:
-                flash('Please confirm your email address before logging in.', 'warning')
-                return redirect(url_for('login'))
-            login_user(user)
-            flash('Logged in successfully.', 'success')
-            return redirect(url_for('dashboard'))
-        else:
-            flash('Invalid username or password.', 'danger')
-    return render_template('login.html', form=form , usuarios = UsuarioNet().obterTodos())
+    if request.method == "POST":
+        usuario_controler = UsuarioNet()
+        index_forms = request.form.get('index')
+        usuario = usuario_controler.obter(index_forms)
+
+        if usuario.Senha == request.form.get("senha"):
+            usuario_login = UserLogin(usuario, index_forms)
+            login_user(usuario_login)
+            session['usuario'] = usuario
+            session["id"] = index_forms
+            return redirect('/user_area')
+
+    return render_template('login.html', usuarios = UsuarioNet().obterTodos())
+
+@app.route('/user_area', methods=['GET', 'POST'])
+def user_area():
+    controle = UsuarioNet()
+    usuario = session.get('usuario')
+    id = session.get('id')
+    print(id)
+    nome = request.form.get("nome")
+    senha = request.form.get("senha")
+    email = request.form.get("email")
+    status = request.form.get("status")
+    assinatura = True
+    user = UsuarioClass(nome, email, senha, status, assinatura)
+    controle.alterar(id,user)
+
+
+    return render_template('user_area.html', usuario = usuario)
+
 
 @app.get('/register')
 def register():
@@ -93,6 +126,8 @@ def register():
         mail.send(msg)
 
         flash('A confirmation email has been sent to you. Please check your inbox.', 'info')
+
+
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
@@ -105,9 +140,10 @@ def register_teste():
     status = request.form.get("status")
     assinatura = True
     a = UsuarioClass(nome, email, senha, status, assinatura)
-    print(a)
+    # print(a)
     Usuario = UsuarioNet()
     Usuario.incluir(p= a)
+    return(redirect('/login'))
 
 @app.route('/confirm/<token>')
 def confirm_email(token):
@@ -136,7 +172,6 @@ def logout():
     logout_user()
     flash('You have been logged out.', 'success')
     return redirect(url_for('login'))
-
 
 
 if __name__ == '__main__':
