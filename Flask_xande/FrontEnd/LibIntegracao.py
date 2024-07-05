@@ -3,7 +3,7 @@ import json
 from LibBiblioteca import ItemClass, AutorClass, UsuarioClass, PagamentoClass
 
 def JSON2Item(dadosJSON):
-    p = ItemClass(dadosJSON["Email"],dadosJSON["Nome"],dadosJSON["Senha"],dadosJSON["Status"],dadosJSON["id"])
+    p = ItemClass(dadosJSON["Autor"],dadosJSON["Categoria"],dadosJSON["Descricao"],dadosJSON["Titulo"])
     return p
 
 def JSON2Pessoa(dadosJSON):
@@ -24,16 +24,35 @@ class UsuarioNet:
     
     def incluir(self, p):
         resposta = requests.post(self.baseURL,json=p.serialize())
-        print('a')
-        print(resposta)
         
-
     def alterar(self, chave , user):
-        print(chave)
-        print(user)
         resposta = requests.put(f'{self.baseURL}/{chave}',json=user.serialize())
         return resposta.status_code # cod HTTP 200 = sucesso
     
-    def excluir(self, matricula):
-        resposta = requests.delete(f'{self.baseURL}/{matricula}')
+    def excluir(self, chave):
+        resposta = requests.delete(f'{self.baseURL}/{chave}')
+        return resposta.status_code # cod HTTP 200 = sucesso
+    
+class ItemNet:
+    def __init__(self):
+        self.baseURL = 'http://127.0.0.1:8001/api/catalogo'
+        
+    def obterTodos(self):
+        resposta = requests.get(self.baseURL)
+        return list(map(lambda x: JSON2Item(x), json.loads(resposta.content)))
+    
+    def obter(self, chave):
+        print(chave)
+        resposta = requests.get(f'{self.baseURL}/{str(chave)}')
+        return JSON2Item(json.loads(resposta.content))
+    
+    def incluir(self, p):
+        resposta = requests.post(self.baseURL,json=p.serialize())
+        
+    def alterar(self, chave , user):
+        resposta = requests.put(f'{self.baseURL}/{chave}',json=user.serialize())
+        return resposta.status_code # cod HTTP 200 = sucesso
+    
+    def excluir(self, chave):
+        resposta = requests.delete(f'{self.baseURL}/{chave}')
         return resposta.status_code # cod HTTP 200 = sucesso

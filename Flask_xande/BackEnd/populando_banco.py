@@ -177,7 +177,7 @@ def incluir_items():
     Session.commit()
 
 
-
+incluir_items()
 
 
 

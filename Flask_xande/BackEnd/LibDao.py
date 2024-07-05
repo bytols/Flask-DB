@@ -16,16 +16,18 @@ class AutorDao:
         p = Autor(Nome_Autor = autor.Autor , Nacionalidade_Autor = autor.Nacionalidade)
         session.add(p)
         session.commit()
+
     def alterar(self, autor):
         session=Session()
         session.execute(update(Autor),[autor.serialize()])
         session.commit()
+
     def excluir(self, chave):
         session = Session()
         p = session.get(Autor, chave)
-        print(p)
         session.delete(p)
         session.commit()
+
     def obterTodos(self):
         session = Session()
         stmt = select(Autor)
@@ -35,6 +37,7 @@ class AutorDao:
             autores.append(autor)
         session.commit()
         return autores
+    
     def obter(self, chave):
         session = Session()
         p = session.get(Autor, chave)
@@ -52,25 +55,25 @@ class UsuarioDao:
         u = Usuario(Nome_Usuario = usuario.Nome , Email_Usuario = usuario.Email , Senha_Usuario =  usuario.Senha, Status_Usuario = usuario.Status , Assinatura = usuario.Assinatura )
         session.add(u)
         session.commit()
+
     def alterar(self, usuario):
         session=Session()
         print(usuario)
-        #transformar usuario em classe
         stmt = (
                 update(Usuario)
                 .where(Usuario.Nome_Usuario == usuario.Nome)
                 .values(Nome_Usuario = usuario.Nome , Email_Usuario = usuario.Email , Senha_Usuario = usuario.Senha , Status_Usuario = usuario.Status , Assinatura = usuario.Assinatura)
                 .execution_options(synchronize_session=False)
                 )
-        #session.execute(update(Usuario).where(Usuario.Nome_Usuario == usuario.Nome),[usuario.serialize()], execution_options={ "synchronize_session" = False})
         session.execute(stmt)
         session.commit()
+
     def excluir(self, chave):
         session = Session()
         u = session.get(Usuario, chave)
-        print(u)
         session.delete(u)
         session.commit()
+
     def obterTodos(self):
         session = Session()
         stmt = select(Usuario)
@@ -80,6 +83,7 @@ class UsuarioDao:
             usuarios.append(usuario)
         session.commit()
         return usuarios
+    
     def obter(self, chave):
         session = Session()
         u = session.get(Usuario, chave)
@@ -94,32 +98,39 @@ class ItemDao:
 
     def incluir(self, item):
         session = Session()
-        i = Item(Titulo_Item = item.Titulo , Descricao_Item = item.Descricao , Autor_Id =  item.Autor, Categoria_Id = item.Categoria, Id_Item = item.ID)
+        i = Item(Titulo_Item = item.Titulo , Descricao_Item = item.Descricao , Autor_Id =  item.Autor, Categoria_Id = item.Categoria)
         session.add(i)
         session.commit()
+
     def alterar(self, item):
         session=Session()
         session.execute(update(Item),[item.serialize()])
         session.commit()
+
     def excluir(self, chave):
         session = Session()
         i = session.get(Item, chave)
-        print(i)
         session.delete(i)
         session.commit()
+
     def obterTodos(self):
         session = Session()
         stmt = select(Item)
         items = []
         for u in session.scalars(stmt):
-            item = ItemClass( u.Titulo_Item , u.Descricao_Item , u.Autor_Id , u.Categoria_Id, u.Id_Item )
+            item = ItemClass( u.Titulo_Item , u.Descricao_Item , u.Autor_Id , u.Categoria_Id )
             items.append(item)
+        print(items)
         session.commit()
         return items
+    
+    
     def obter(self, chave):
         session = Session()
         u = session.get(Item, chave)
-        item = ItemClass(u.Titulo_Item , u.Descricao_Item , u.Autor_Id , u.Categoria_Id, u.Id_Item)
+        stmt = select(Item).where(Item.Titulo_Item == str(chave))
+        stmt = session.execute(stmt).scalars().first()
+        item = ItemClass(stmt.Titulo_Item , stmt.Descricao_Item , stmt.Autor_Id , stmt.Categoria_Id)
         session.commit()
         return item
     

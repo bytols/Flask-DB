@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca do Éter</title>
-    <link rel="icon" type="image/png" href="icon.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <header>
@@ -26,41 +26,17 @@
         <section class="catalogo">
             <h2>Catálogo</h2>
             <div class="imgcatalogo">
-                <div class="img-container"><a href=""></a> <img src="catalogo/ArtePaz.png" alt="arte da paz"></div>
-                <div class="img-container"><a href=""></a> <img src="catalogo/Duna.png" alt="Duna"> </div>
-                <div class="img-container"><a href=""></a> <img src="catalogo/hp1.png" alt="Harry Potter 1"> </div>
-                <div class="img-container"><a href=""></a> <img src="catalogo/hp 2.png" alt="Harry Potter 2"> </div>
-                <div class="img-container"><a href=""></a> <img src="catalogo/hp 3.png" alt="Harry Potter 3"> </div>
-                <div class="img-container"><a href=""></a><img src="catalogo/hp4.png" alt="Harry Potter 4"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/hp5.png" alt="Harry Potter 5"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/hp6.png" alt="Harry Potter 6"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/hp7.png" alt="Harry Potter 7"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/100solidão.png" alt="Harry Potter 7"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/1984.png" alt="Harry Potter 7"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/Alquimista.png" alt="Harry Potter 7"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/annakari.png" alt="Harry Potter 7"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/assassinato.png" alt="Harry Potter 7"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/brida.png" alt="Harry Potter 7"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/casaespirito.png" alt="Harry Potter 7"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/diariomago.png" alt="Harry Potter 7"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/guerraepaz.png" alt="Harry Potter 7"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/Haruki.png" alt="Harry Potter 7"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/hobbit.png" alt="placeholderblahblah"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/huckleberry.png" alt="placeholderblahblah"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/iluminado.png" alt="placeholderblahblah"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/It.png" alt="placeholderblahblah"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/morte anunciada.png" alt="placeholderblahblah"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/mortenilo.png" alt="placeholderblahblah"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/norwegian.png" alt="placeholderblahblah"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/paula.png" alt="placeholderblahblah"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/revolucaobicho.png" alt="placeholderblahblah"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/Senhor dos aneis.png" alt="placeholderblahblah"></div>
-                <div class="img-container"><a href=""></a><img src="catalogo/tomsawyer.png" alt="placeholderblahblah"></div>
-
+                {% for l in livros %}
+                    <div>
+                        <h2>{{l.Categoria}}</h2>
+                        <a href="{{ url_for('detalhamento', chave=l.Categoria) }}"><img src="{{ url_for('static', filename='img/catalogo/' + l.Categoria + '.png') }}" alt="{{ l.Categoria }}"></a>
+                    </div>
+                {% endfor %}
             </div>
             </div>
         </section>
     </main>
+
 
     <!-- Footer -->
     <footer>

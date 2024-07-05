@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca do Éter</title>
     <link rel="icon" type="image/png" href="icon.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <header>
@@ -23,15 +23,12 @@
         </div>
     </header>
     <main>
-        <section class="catalogo">
-            <h2>Livro</h2>
-            <h1>Livro Nome</h1>
-            <h3>Livro autor</h3>
-
-
-
-            <div class="imgcatalogo">
-        </section>
+            <section class="catalogo">       
+                <h1>{{livro.Categoria}}</h1>             
+                <h1>{{livro.Autor}}</h1>
+                <a href="#"><img src="{{ url_for('static', filename='img/catalogo/' + livro.Categoria + '.png') }}" alt="{{ livro.Categoria }}"></a>
+                <div class="imgcatalogo">
+            </section>
     </main>
 
     <!-- Footer -->

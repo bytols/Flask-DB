@@ -50,24 +50,21 @@ def excluir(chave):
     controle_user.excluir(chave)
     return make_response("Removido!",200)
 
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", debug=True, port=8001)
-
 
 
 # Catalogo
 
 @app.get("/api/catalogo")
-def obterTodos():
+def obterTodosCatalogo():
     return jsonify(list(map(lambda x: x.serialize(), controle_item.obterTodos())))
 
 
 @app.get("/api/catalogo/<chave>")
-def obter(chave):
+def obterCatalogo(chave):
     return jsonify(controle_item.obter(chave).serialize())
 
 @app.post("/api/catalogo")
-def incluir():
+def incluirCatalogo():
     dados = request.get_json()
     u = ItemClass(dados["nome"], dados["idade"])
     u.chave = dados["chave"]
@@ -75,7 +72,7 @@ def incluir():
     return jsonify(u.serialize())
 
 @app.put("/api/catalogo/<chave>")
-def alterar(chave):
+def alterarCatalogo(chave):
     dados = request.get_json()
     p = controle_item.obter(chave)
     p.nome = dados["nome"]
@@ -84,7 +81,7 @@ def alterar(chave):
     return make_response("Alterado!",200)
 
 @app.delete("/api/catalogo/<chave>")
-def excluir(chave):
+def excluirCatalogo(chave):
     controle_item.excluir(chave)
     return make_response("Removido!",200)
 
