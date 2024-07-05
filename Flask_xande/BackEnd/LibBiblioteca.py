@@ -67,17 +67,18 @@ class ItemClass:
     
 class PagamentoClass:
 
-    def __init__(self , Usuario:object , Valor_Pagamento:int , Metodo_Pagamento:str ):
+    def __init__(self , Usuario:int, Valor_Pagamento:int , Metodo_Pagamento:str ):
+        
         self.Usuario = Usuario
         self.Valor_Pagamento = Valor_Pagamento
         self.Metodo_Pagamento = Metodo_Pagamento
 
     def __repr__(self) -> str:
-        return f""" Nome:{self.Usuario} , Email:{self.Valor_Pagamento} , Senha:{self.Metodo_Pagamento} """
+        return f""" Usuario:{self.Usuario} , Valor_Pagamento:{self.Valor_Pagamento} , Metodo_Pagamento:{self.Metodo_Pagamento} """
 
     def __repr__(self) -> str:
         return f""" é uma classe que gera um objeto Livro para o banco de dados, recebe os atributos, nome, email, senha, status e situação da assinatura
-                Nome:{self.Usuario} , Email:{self.Valor_Pagamento} , Senha:{self.Metodo_Pagamento}
+                Usuario:{self.Usuario} , Valor_Pagamento:{self.Valor_Pagamento} , Metodo_Pagamento:{self.Metodo_Pagamento}
         """
     
     def serialize(self):

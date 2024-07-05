@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 controle_item = ItemController()
 controle_user = UsuarioController()
+controle_pagamento = PagamentoController()
 
 
 
@@ -84,6 +85,48 @@ def alterarCatalogo(chave):
 def excluirCatalogo(chave):
     controle_item.excluir(chave)
     return make_response("Removido!",200)
+
+
+
+
+# pagamento
+
+
+
+
+@app.get("/api/pagamento")
+def obterTodosPagamento():
+    return jsonify(list(map(lambda x: x.serialize(), controle_pagamento.obterTodos())))
+
+@app.get("/api/pagamento/<chave>")
+def obterPagamento(chave):
+    return jsonify(controle_pagamento.obter(chave).serialize())
+
+@app.post("/api/pagamento")
+def incluirPagamento():
+    dados = request.get_json()
+    u = PagamentoClass(dados["Usuario"], dados["Valor_Pagamento"], dados["Metodo_Pagamento"] )
+    controle_pagamento.incluir(u)
+    return jsonify(u.serialize())
+
+@app.put("/api/pagamento/<chave>")
+def alterarPagamento(chave):
+    dados = request.get_json()
+    print(dados)
+    u = controle_pagamento.obter(chave)
+    u.Nome = dados["Nome"]
+    u.Email = dados["Email"]
+    u.Senha = dados["Senha"]
+    u.Status = dados["Status"]
+    u.Assinatura = dados["Assinatura"]
+    controle_pagamento.alterar(u)
+    return make_response("Alterado!",200)
+
+@app.delete("/api/pagamento/<chave>")
+def excluirPagamento(chave):
+    controle_pagamento.excluir(chave)
+    return make_response("Removido!",200)
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True, port=8001)

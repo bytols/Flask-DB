@@ -4,21 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" type="image/png" href="{{url_for('static', filename= 'icon.png')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename= 'styles.css')}}">
+    <title>Login</title>
 </head>
 <body>
-    <h2>Login</h2>
+
+    <section class="logincontainer">
+    <h2>BIBLIOTECA DO ÉTER</h2>    
+    <h5>LOGIN</h5>
 
     <form method="POST" action="/login">
-        <label for="">index</label>
+        <label for="">Id</label><br>
         <input type="text" name="index" >
-        <label for="">Usuario</label>
+        <br><br>
+        <label for="">Usuário</label><br>
         <input type="text" name="usuario" >
-        <label for="">Senha</label>
+        <br><br>
+        <label for="">Senha</label><br>
         <input type="text" name="senha" >
-        <button><input type="submit" value="Cadastrar"></button>
+        <br><br>
+        <button><input type="submit" value="Entrar"></button><br>
+        <a href="{{ url_for('register_teste')}}">Não possuo cadastro</a>
     
     </form> 
+    </section>
 </body>
 </html>
-

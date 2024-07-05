@@ -4,7 +4,7 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from LibBiblioteca import ItemClass, AutorClass, UsuarioClass , PagamentoClass
-from LibIntegracao import UsuarioNet , ItemNet
+from LibIntegracao import UsuarioNet , ItemNet , PagamentoNet
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 from forms import LoginForm, RegistrationForm
@@ -137,11 +137,34 @@ def catalogo():
 @app.route('/detalhamento/<chave>' ,  methods=['GET', 'POST'])
 def detalhamento(chave):
     controle = ItemNet()
-    livro = controle.obter(str(chave))
+    livro = controle.obter(chave)
     print('a')
     print(livro.Autor)
     print(livro.Categoria)
     return render_template('detalhar.html' , livro = livro)
+
+@app.route('/pagamento' ,  methods=['GET', 'POST'])
+def pagamento():
+    
+    if request.method == 'POST':
+        Usuario = session.get('id')
+        Valor_Pagamento = request.form.get("Modalidade")
+        Metodo_Pagamento = request.form.get("Pagamento")
+        a = PagamentoClass(Usuario, Valor_Pagamento, Metodo_Pagamento)
+        print(a)
+        Pagamento = PagamentoNet()
+        Pagamento.incluir(p= a)
+        return redirect('/user_area')
+    
+    return render_template('pagamento.html')
+
+@app.route('/home' ,  methods=['GET', 'POST'])
+def home():
+    return render_template('index.html')
+
+@app.route('/contato' ,  methods=['GET', 'POST'])
+def contato():
+    return render_template('contato.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

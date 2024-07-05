@@ -58,6 +58,7 @@ class PagamentoController:
     def __init__(self):
         self.dao = PagamentoDao()
     def incluir(self, pagamento):
+        print(pagamento)
         if(type(pagamento) is not PagamentoClass):
             raise "Não é um pagamento Cadastrado!"
         return self.dao.incluir(pagamento)

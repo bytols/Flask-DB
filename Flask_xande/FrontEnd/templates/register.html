@@ -3,25 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" type="image/png" href="{{url_for('static', filename= 'icon.png')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename= 'styles.css')}}">
+    <title>Registrar</title>
 </head>
 <body>
+    <section class="logincontainer">
+        <h2>BIBLIOTECA DO ÉTER</h2>    
+        <h5>CADASTRAR</h5>
     <form action="/register" method="post">
-        <label for="teste">nome</label>
+        <label for="teste">Nome</label>
         <input type="text" name="nome">
-        <label for="teste">senha</label>
+        <br><br>
+        <label for="teste">Senha</label>
         <input type="text" name="senha"> 
-        <label for="teste">email</label>
+        <br><br>
+        <label for="teste">Email</label>
         <input type="text" name="email"> 
-        <label for="teste">status</label>
-        <input type="text" name="status">  
-        <label for="teste">assinatura</label>
-        <input type="checkbox" name="assinatura">  
-        <button><submit type="submit">clicar</submit></button>
+        <br><br>
+        <label for="teste">Status</label>
+        <input type="text" name="status">
+        <br><br>  
+        <label for="teste">Assinatura</label>
+        <input type="checkbox" name="assinatura">
+        <br><br>  
+        <button><submit type="submit">Cadastrar</submit></button>
     </form>
+    </section>
 
 
 </body>
 </html>
-
-

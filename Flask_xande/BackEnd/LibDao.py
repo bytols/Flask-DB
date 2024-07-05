@@ -107,6 +107,8 @@ class ItemDao:
         session.execute(update(Item),[item.serialize()])
         session.commit()
 
+        
+
     def excluir(self, chave):
         session = Session()
         i = session.get(Item, chave)
@@ -128,8 +130,9 @@ class ItemDao:
     def obter(self, chave):
         session = Session()
         u = session.get(Item, chave)
-        stmt = select(Item).where(Item.Titulo_Item == str(chave))
-        stmt = session.execute(stmt).scalars().first()
+        stmt = select(Item).where(Item.Titulo_Item == chave)
+        stmt = session.execute(stmt)
+        print(stmt)
         item = ItemClass(stmt.Titulo_Item , stmt.Descricao_Item , stmt.Autor_Id , stmt.Categoria_Id)
         session.commit()
         return item
@@ -142,19 +145,31 @@ class PagamentoDao:
 
     def incluir(self, pagamento):
         session = Session()
+        print('Dao')
+        print(pagamento)
         p = Pagamento(Usuario_Id = pagamento.Usuario , Valor_Pagamento = pagamento.Valor_Pagamento , Metodo_Pagamento =  pagamento.Metodo_Pagamento)
+        print(p)
         session.add(p)
         session.commit()
+
     def alterar(self, pagamento):
         session=Session()
-        session.execute(update(Pagamento),[pagamento.serialize()])
+        print(pagamento)
+        stmt = (
+                update(Pagamento)
+                .where(Pagamento.Usuario_Id == pagamento.Nome)
+                .values(Usuario_Id = pagamento.Usuario , Valor_Pagamento = pagamento.Valor_Pagamento , Metodo_Pagamento = pagamento.Metodo_Pagamento )
+                .execution_options(synchronize_session=False)
+                )
+        session.execute(stmt)
         session.commit()
+
     def excluir(self, chave):
         session = Session()
         p = session.get(Pagamento, chave)
-        print(p)
         session.delete(p)
         session.commit()
+
     def obterTodos(self):
         session = Session()
         stmt = select(Pagamento)
@@ -164,6 +179,7 @@ class PagamentoDao:
             pagamentos.append(pagamento)
         session.commit()
         return pagamentos
+    
     def obter(self, chave):
         session = Session()
         p = session.get(Pagamento, chave)

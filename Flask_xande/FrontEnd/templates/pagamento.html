@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contato - Biblioteca do Éter</title>
+    <title>Adc Método Pagamento</title>
     <link rel="icon" type="image/png" href="{{url_for('static', filename= 'icon.png')}}">
     <link rel="stylesheet" href="{{url_for('static', filename= 'styles.css')}}">
     
@@ -16,7 +16,7 @@
         <div class="container">
             <div class="title">
                 <h1 class="title"><img src="{{url_for('static', filename= 'icon.png')}}" alt="Ícone"> Biblioteca do Éter</h1>
-                
+                <b>Biblioteca do Éter</b>
             </div>
             <nav>
                 <a href="{{ url_for('home')}}" class="home-btn">Home</a>
@@ -26,22 +26,29 @@
         </div>
     </header>
 
-    <!-- Formulário de Contato -->
     <main>
-        <section class= "sectioncontato">
-            <h2>Entre em Contato Conosco</h2>
-            <form  method="POST">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" required>
+        <section class= "user-area">
+            <h2>Adicionar Método de Pagamento</h2>
+            <h4>Insira os Dados do Seu Cartão:</h4>
+            <form action="/pagamento" method="POST">
+                <h1>Forma de Pagamento</h1>
+                <input type="radio" id="pix" name="Pagamento" value="pix">
+                <label for="pix">pix</label><br>
+                <input type="radio" id="credito" name="Pagamento" value="cartao de credito">
+                <label for="cartao de credito">cartão de crédito</label><br>
+                <input type="radio" id="debito" name="Pagamento" value="cartao de debito">
+                <label for="cartao de debito">cartão de debito</label><br>
+                <input type="radio" id="boleto" name="Pagamento" value="boleto">
+                <label for="boleto">boleto</label><br>
+                <h1>Modalidade de Pagamento:</h1>
+                <input type="radio" id="mensal" name="Modalidade" value="30">
+                <label for="30">30 - Mensal</label><br>
+                <input type="radio" id="semestral" name="Modalidade" value="300">
+                <label for="300">300 - Semestral</label><br>
+                <input type="radio" id="anual" name="Modalidade" value="500">
+                <label for="500">500 - semestral</label>
                 <br> <br>
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" required>
-                <br> <br>
-                <label for="mensagem">Mensagem:</label>
-                <br>
-                <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
-                <br> <br>
-                <button type="submit" class="contato-btn">Enviar Mensagem</button>
+                <button name="cadastrar" type="submit">Cadastrar Cartão</button>
             </form>
         </section>
     </main>
