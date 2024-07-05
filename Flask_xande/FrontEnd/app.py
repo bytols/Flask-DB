@@ -84,17 +84,25 @@ def login():
 
 @app.route('/user_area', methods=['GET', 'POST'])
 def user_area():
+    
     controle = UsuarioNet()
+    delete = request.form.get("excluir")
     usuario = session.get('usuario')
     id = session.get('id')
-    print(id)
-    nome = request.form.get("nome")
-    senha = request.form.get("senha")
-    email = request.form.get("email")
-    status = request.form.get("status")
-    assinatura = True
-    user = UsuarioClass(nome, email, senha, status, assinatura)
-    controle.alterar(id,user)
+    print(delete)
+
+    if delete:
+        print(delete)
+        print(delete)
+        controle.excluir(usuario)
+    else:
+        nome = request.form.get("nome")
+        senha = request.form.get("senha")
+        email = request.form.get("email")
+        status = request.form.get("status")
+        assinatura = True
+        user = UsuarioClass(nome, email, senha, status, assinatura)
+        controle.alterar(id,user)
 
 
     return render_template('user_area.html', usuario = usuario)
