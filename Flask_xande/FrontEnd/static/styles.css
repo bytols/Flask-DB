@@ -118,6 +118,172 @@ h2 {
     margin-top: 0;
 }
 
+.logincontainer{
+    width: 50%;
+    margin: 25 auto;
+    justify-content: space-between;
+    border-radius: 10px;
+    
+}
+
+.logincontainer h2{
+    font-family: 'ITC Serif Gothic';
+    font-size: 48px;
+    color: #ff923a;
+    margin-bottom: 7px;
+    text-align: center;
+
+}
+
+.logincontainer h5{
+    font-family: 'Roboto';
+    font-size: 30px;
+    color: #F58348;
+    margin-top: 3px;
+    margin-bottom: 35px ;
+    text-align: center;
+}
+
+.logincontainer form{
+    
+    font-family: 'Roboto';
+    font-size: 16px;
+    color: #555;
+    font-weight: bold;
+    margin-top: 3px;
+    padding: 0px 130px;
+    font-style: italic;
+    
+}
+
+.logincontainer input[type="text"]{
+    
+    width: 100%; 
+    height: 13px; 
+    padding: 10px; 
+    font-size: 13px; 
+    border: 1px solid #ccc;
+    border-radius: 3.5px; 
+    box-sizing: border-box;
+    font-family: 'Roboto';
+    
+}
+
+.logincontainer input[type="submit"]{
+    
+    font-size: 15px; 
+    border: none;
+    padding: 15px 120px;
+    font-family: 'Roboto';
+    font-weight: bold;
+    color: #fff;
+    background-color: #F58348;
+    cursor: pointer;
+
+
+}
+
+.logincontainer input[type="submit"]:hover{
+    background-color: #bb5826;
+    transition:0.1s;
+}
+
+.logincontainer button{
+    background-color: #F58348;
+    border: none;
+    outline: none;
+    border-radius: 9px; 
+    cursor: pointer;
+    align-items: center;
+}
+
+.logincontainer button:hover{
+    background-color: #bb5826;
+    transition:0.1s;
+
+}
+
+.logincontainer submit{
+    
+    font-size: 20px; 
+    border: none;
+    padding: 0 95px;
+    font-family: 'Roboto';
+    font-weight: bold;
+    color: #fff;
+    background-color: #F58348;
+    cursor: pointer;
+
+}
+
+.logincontainer submit:hover{
+    background-color: #bb5826;
+    transition:0.1s;
+}
+
+.logincontainer a{
+    color: #555;
+
+}
+
+.user-area form{
+    
+    font-family: 'Roboto';
+    font-size: 16px;
+    color: #555;
+    font-weight: bold;
+    padding: 0px 30px;
+    font-style: italic;
+    
+}
+
+
+.user-area input[type="text"]{
+    width: 40%; 
+    height: 13px; 
+    padding: 10px; 
+    font-size: 13px; 
+    border: 1px solid #ccc;
+    border-radius: 3.5px; 
+    box-sizing: border-box;
+    font-family: 'Roboto';
+
+
+}
+
+.user-area button{
+    font-size: 20px; 
+    border: none;
+    padding: 6px 145px;
+    font-family: 'Roboto';
+    font-weight: bold;
+    color: #fff;
+    background-color: #F58348;
+    cursor: pointer;
+    background-color: #F58348;
+    outline: none;
+    border-radius: 9px; 
+    cursor: pointer;
+
+
+}
+
+.user-area button:hover{
+    background-color: #bb5826;
+    transition:0.1s;
+}
+
+.user-area form{
+    
+    font-family: 'Roboto';
+    font-size: 16px;
+    color: #555;
+    font-weight: bold;
+    padding: 0px 30px;
+    font-style: italic;
+    
+}
+
 .welcome {
     text-align: center;
     padding: 40px 20px;
@@ -367,3 +533,4 @@ footer {
 .img-container:hover::after {
     opacity: 1; 
 }
+

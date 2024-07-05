@@ -6,13 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca do Éter</title>
-    <link rel="icon" type="image/png" href="icon.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="{{url_for('static', filename= 'icon.png')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename= 'styles.css')}}">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1 class="title"><img src="icon.png" alt="Ícone"> Biblioteca do Éter</h1>
+            <h1 class="title"><img src="{{url_for('static', filename= 'icon.png')}}" alt="Ícone"> Biblioteca do Éter</h1>
             <div class="search-bar">
                 <input type="text" id="searchInput" placeholder="Buscar eBooks...">
                 <button onclick="searchBooks()">Pesquisar</button>
@@ -38,16 +38,16 @@
                     <input type="radio" name="radio-btn" id="radio4">
                 
                     <div class="slide first">
-                    <img src="Iconebook/1.png" alt="ebook1">
+                    <img src="{{url_for('static', filename= 'Iconebook/1.png')}}" alt="ebook1">
                     </div>
                     <div class="slide">
-                        <img src="Iconebook/2.png" alt="ebook2">
+                        <img src="{{url_for('static', filename= 'Iconebook/2.png')}}" alt="ebook2">
                         </div>
                         <div class="slide">
-                            <img src="Iconebook/3.png" alt="ebook3" >
+                            <img src="{{url_for('static', filename= 'Iconebook/3.png')}}" alt="ebook3" >
                             </div>
                             <div class="slide">
-                                <img src="Iconebook/4.png" alt="ebook4" >
+                                <img src="{{url_for('static', filename= 'Iconebook/4.png')}}" alt="ebook4" >
                             </div>    
 
                     <div class="navigation-auto">

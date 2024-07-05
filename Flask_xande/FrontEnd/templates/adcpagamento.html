@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contato - Biblioteca do Éter</title>
+    <title>Adc Método Pagamento</title>
     <link rel="icon" type="image/png" href="{{url_for('static', filename= 'icon.png')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename= 'styles.css')}}">
+    <link rel="stylesheet" href="styles.css">
     
 </head>
 
@@ -26,22 +26,22 @@
         </div>
     </header>
 
-    <!-- Formulário de Contato -->
     <main>
-        <section class= "sectioncontato">
-            <h2>Entre em Contato Conosco</h2>
-            <form action="enviar_contato.php" method="POST">
-                <label for="nome">Nome:</label>
+        <section class= "user-area">
+            <h2>Adicionar Método de Pagamento</h2>
+            <h4>Insira os Dados do Seu Cartão:</h4>
+            <form action="/adcpagamento" method="POST">
+                <label for="nome">Número do Cartão:</label><br>
+                <input type="text" id="numero" name="numero" required><br>
+                <label for="nome">Nome do Títular:</label><br>
                 <input type="text" id="nome" name="nome" required>
-                <br> <br>
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" required>
-                <br> <br>
-                <label for="mensagem">Mensagem:</label>
                 <br>
-                <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
+                <label for="email">CVC:</label><br>
+                <input type="email" id="CVC" name="CVC" required><br>
+                <label for="email">Vencimento:</label><br>
+                <input type="month" id="vencimento" name="vencimento" required>
                 <br> <br>
-                <button type="submit" class="contato-btn">Enviar Mensagem</button>
+                <button name="cadastrar" type="submit">Cadastrar Cartão</button>
             </form>
         </section>
     </main>
