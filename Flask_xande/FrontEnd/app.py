@@ -143,5 +143,13 @@ def detalhamento(chave):
     print(livro.Categoria)
     return render_template('detalhar.html' , livro = livro)
 
+@app.route('/home' ,  methods=['GET', 'POST'])
+def home():
+    return render_template('index.html')
+
+@app.route('/contato' ,  methods=['GET', 'POST'])
+def contato():
+    return render_template('contato.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

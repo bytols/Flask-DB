@@ -129,7 +129,7 @@ def incluir_items():
     controler.incluir(d)
     e = ItemClass(Titulo="Kafka à Beira-Mar", Descricao="A jornada surreal de um adolescente e um idoso em busca de verdades ocultas", Autor=Haruki_Murakami.id_Autor, Categoria=categoria_ficcao.Id_Categoria)
     controler.incluir(e)
-    f = ItemClass(Titulo="O Senhor dos Anéis: A Sociedade do Anel", Descricao="Um grupo de heróis embarca em uma jornada épica para destruir um anel mágico", Autor=JRR_Tolkien.id_Autor, Categoria=categoria_aventura.Id_Categoria)
+    f = ItemClass(Titulo="O Senhor dos Anéis A Sociedade do Anel", Descricao="Um grupo de heróis embarca em uma jornada épica para destruir um anel mágico", Autor=JRR_Tolkien.id_Autor, Categoria=categoria_aventura.Id_Categoria)
     controler.incluir(f)
     g = ItemClass(Titulo="A Casa dos Espíritos", Descricao="A vida de várias gerações de uma família chilena marcada por eventos sobrenaturais", Autor=Isabel_Allende.id_Autor, Categoria=categoria_romance.Id_Categoria)
     controler.incluir(g)
